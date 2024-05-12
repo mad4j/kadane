@@ -39,19 +39,20 @@ where
     best_sum
 }
 
-pub fn kadane_02<T>(values: &[T]) -> &T
+pub fn kadane_02<T>(values: &[T]) -> T
 where
-    T: Ord + Add<T, Output = T>,
+    //T: Clone + Ord + Add<T, Output = T>,
+    T: Clone + Ord + for<'a> Add<&'a T, Output=T>,
 {
-    let mut best_sum = &values[0];
-    let mut current_sum = &values[0];
+    let mut best_sum = values[0].clone();
+    let mut current_sum = values[0].clone();
 
     for v in &values[1..] {
 
-        let t = (*current_sum).clone();
+        current_sum = current_sum + v;
 
-        current_sum = max(v, &t);
-        best_sum = max(best_sum, current_sum);
+        current_sum = max(v, &current_sum).clone();
+        best_sum = max(&best_sum, &current_sum).clone();
     }
 
     best_sum
@@ -69,7 +70,7 @@ mod tests {
         let result = kadane_00(&[-2, 1, -3, 4, -1, 2, 1, -5, 4]);
         assert_eq!(result, 6);
 
-        let result = kadane_01(&[-2, 1, -3, 4, -1, 2, 1, -5, 4]);
+        let result = kadane_02(&[-2, 1, -3, 4, -1, 2, 1, -5, 4]);
         assert_eq!(result, 6);
     }
 }
