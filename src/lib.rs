@@ -1,4 +1,7 @@
-use std::{cmp::max, ops::Add};
+use std::{
+    cmp::max,
+    ops::{Add, AddAssign},
+};
 
 pub fn kadane_00(values: &[i64]) -> i64 {
     let mut best_sum = i64::MIN;
@@ -12,7 +15,7 @@ pub fn kadane_00(values: &[i64]) -> i64 {
     best_sum
 }
 
-pub fn kadane(values: &[i64]) -> i64 {
+pub fn kadane_01(values: &[i64]) -> i64 {
     let mut best_sum = values[0];
     let mut current_sum = values[0];
 
@@ -24,7 +27,7 @@ pub fn kadane(values: &[i64]) -> i64 {
     best_sum
 }
 
-pub fn kadane_01<T>(values: &[T]) -> T
+pub fn kadane_02<T>(values: &[T]) -> T
 where
     T: Copy + Ord + Add<T, Output = T>,
 {
@@ -39,16 +42,37 @@ where
     best_sum
 }
 
-pub fn kadane_02<T>(values: &[T]) -> T
+pub fn kadane_03<T>(values: &[T]) -> T
 where
-    T: Clone + Ord + for<'a> Add<&'a T, Output=T>,
+    T: Clone + Ord + for<'a> Add<&'a T, Output = T>,
 {
     let mut best_sum = values[0].clone();
     let mut current_sum = values[0].clone();
 
     for v in &values[1..] {
-
         current_sum = current_sum + v;
+
+        if *v > current_sum {
+            current_sum = v.clone();
+        }
+
+        if current_sum > best_sum {
+            best_sum = current_sum.clone();
+        }
+    }
+
+    best_sum
+}
+
+pub fn kadane_04<T>(values: &[T]) -> T
+where
+    T: Clone + Ord + AddAssign,
+{
+    let mut best_sum = values[0].clone();
+    let mut current_sum = values[0].clone();
+
+    for v in &values[1..] {
+        current_sum += v.clone();
 
         if *v > current_sum {
             current_sum = v.clone();
@@ -68,13 +92,19 @@ mod tests {
 
     #[test]
     fn it_works() {
-        let result = kadane(&[-2, 1, -3, 4, -1, 2, 1, -5, 4]);
-        assert_eq!(result, 6);
-
         let result = kadane_00(&[-2, 1, -3, 4, -1, 2, 1, -5, 4]);
         assert_eq!(result, 6);
 
+        let result = kadane_01(&[-2, 1, -3, 4, -1, 2, 1, -5, 4]);
+        assert_eq!(result, 6);
+
         let result = kadane_02(&[-2, 1, -3, 4, -1, 2, 1, -5, 4]);
+        assert_eq!(result, 6);
+
+        let result = kadane_03(&[-2, 1, -3, 4, -1, 2, 1, -5, 4]);
+        assert_eq!(result, 6);
+
+        let result = kadane_04(&[-2, 1, -3, 4, -1, 2, 1, -5, 4]);
         assert_eq!(result, 6);
     }
 }
