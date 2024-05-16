@@ -47,8 +47,11 @@ where
     let mut best_sum = values[0].clone();
     let mut current_sum = values[0].clone();
 
+    // best sum boundaries
     let mut best_first_index = 0;
     let mut best_last_index = 1;
+
+    // current sum boundaries
     let mut current_first_index = 0;
     let mut current_last_index = 1;
 
