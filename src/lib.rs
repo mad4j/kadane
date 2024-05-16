@@ -5,7 +5,7 @@ where
     T: Clone + Ord + for<'a> AddAssign<&'a T>,
 {
     // verify input validity
-    if values.len() == 0 {
+    if values.is_empty() {
         return None;
     }
 
@@ -40,7 +40,7 @@ where
     T: Clone + Ord + for<'a> AddAssign<&'a T>,
 {
     // verify input validity
-    if values.len() == 0 {
+    if values.is_empty() {
         return None;
     }
 
@@ -92,6 +92,6 @@ mod tests {
     fn test_kadane_seq() {
         let result = kadane_seq(&[-2, 1, -3, 4, -1, 2, 1, -5, 4]);
         println!("{:?}", result);
-        //assert_eq!(result, Some(6));
+        assert_eq!(result.unwrap().len(), 4);
     }
 }
