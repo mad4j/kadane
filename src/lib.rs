@@ -92,7 +92,8 @@ mod tests {
     #[test]
     fn test_kadane_seq() {
         let result = kadane_seq(&[-2, 1, -3, 4, -1, 2, 1, -5, 4]);
-        println!("{:?}", result);
+        assert_eq!(result.unwrap(), [4, -1, 2, 1]);
+        assert_eq!(result.unwrap().iter().sum::<i64>(), 6);
         assert_eq!(result.unwrap().len(), 4);
     }
 }
