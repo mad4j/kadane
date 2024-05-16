@@ -16,7 +16,6 @@ where
     // use iterator instead of range for better performances
     // for v in &values[1..] {
     values.iter().skip(1).for_each(|v| {
-        
         // update current sum
         current_sum += v;
 
@@ -25,7 +24,7 @@ where
             current_sum = v.clone();
         }
 
-        // current sum better of last better sum 
+        // current sum better of last better sum
         if current_sum > best_sum {
             best_sum = current_sum.clone();
         }
@@ -55,10 +54,9 @@ where
 
     // use iterator instead of range for better performances
     values.iter().enumerate().skip(1).for_each(|(i, v)| {
-        
         // update current sum
         current_sum += v;
-        current_last_index = i+1;
+        current_last_index = i + 1;
 
         // last element alone better of current sum
         if *v > current_sum {
@@ -66,7 +64,7 @@ where
             current_first_index = i;
         }
 
-        // current sum better of last better sum 
+        // current sum better of last better sum
         if current_sum > best_sum {
             best_sum = current_sum.clone();
             best_first_index = current_first_index;
