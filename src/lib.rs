@@ -1,6 +1,20 @@
+//! Kadane algorithm implementation
+//! Daniele Olmisani <daniele.olmisani@gmail.com>
+//! 
+//! see LICENSE file
+
 use std::ops::AddAssign;
 
-pub fn kadane<T>(values: &[T]) -> Option<T>
+/// Implements Kadane algorithm for maximum subarray problem.
+/// 
+/// # Examples
+/// ```
+/// use kadane;
+/// assert_eq!(kadane::kadane(&[-2, 1, -3, 4, -1, 2, 1, -5, 4]), Some(6));
+/// ```
+/// Return None in case of zero-length array.
+/// 
+pub fn max_subarray_sum<T>(values: &[T]) -> Option<T>
 where
     T: Clone + Ord + for<'a> AddAssign<&'a T>,
 {
@@ -34,7 +48,17 @@ where
     Some(best_sum)
 }
 
-pub fn kadane_seq<T>(values: &[T]) -> Option<&[T]>
+
+/// Implements Kadane algorithm for maximum subarray problem.
+/// 
+/// # Examples
+/// ```
+/// use kadane;
+/// assert_eq!(kadane::kadane(&[-2, 1, -3, 4, -1, 2, 1, -5, 4]), Some(6));
+/// ```
+/// Return None in case of zero-length array.
+/// 
+pub fn max_subarray<T>(values: &[T]) -> Option<&[T]>
 where
     T: Clone + Ord + for<'a> AddAssign<&'a T>,
 {
@@ -85,13 +109,13 @@ mod tests {
 
     #[test]
     fn test_kadane() {
-        let result = kadane(&[-2, 1, -3, 4, -1, 2, 1, -5, 4]);
+        let result = max_subarray_sum(&[-2, 1, -3, 4, -1, 2, 1, -5, 4]);
         assert_eq!(result, Some(6));
     }
 
     #[test]
     fn test_kadane_seq() {
-        let result = kadane_seq(&[-2, 1, -3, 4, -1, 2, 1, -5, 4]);
+        let result = max_subarray(&[-2, 1, -3, 4, -1, 2, 1, -5, 4]);
         assert_eq!(result.unwrap(), [4, -1, 2, 1]);
         assert_eq!(result.unwrap().iter().sum::<i64>(), 6);
         assert_eq!(result.unwrap().len(), 4);

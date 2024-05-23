@@ -1,9 +1,9 @@
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
-use kadane::kadane;
+use kadane::max_subarray_sum;
 
 fn criterion_benchmark(c: &mut Criterion) {
     c.bench_function("kadane", |b| {
-        b.iter(|| kadane(black_box(&[-2, 1, -3, 4, -1, 2, 1, -5, 4])))
+        b.iter(|| max_subarray_sum(black_box(&[-2, 1, -3, 4, -1, 2, 1, -5, 4])))
     });
 }
 
