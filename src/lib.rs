@@ -1,19 +1,19 @@
 //! Kadane algorithm implementation
 //! Daniele Olmisani <daniele.olmisani@gmail.com>
-//! 
+//!
 //! see LICENSE file
 
 use std::ops::AddAssign;
 
 /// Implements Kadane algorithm for maximum subarray problem.
-/// 
+///
 /// # Examples
 /// ```
 /// use kadane;
-/// assert_eq!(kadane::kadane(&[-2, 1, -3, 4, -1, 2, 1, -5, 4]), Some(6));
+/// assert_eq!(kadane::max_subarray_sum(&[-2, 1, -3, 4, -1, 2, 1, -5, 4]), Some(6));
 /// ```
 /// Return None in case of zero-length array.
-/// 
+///
 pub fn max_subarray_sum<T>(values: &[T]) -> Option<T>
 where
     T: Clone + Ord + for<'a> AddAssign<&'a T>,
@@ -48,16 +48,15 @@ where
     Some(best_sum)
 }
 
-
 /// Implements Kadane algorithm for maximum subarray problem.
-/// 
+///
 /// # Examples
 /// ```
 /// use kadane;
-/// assert_eq!(kadane::kadane(&[-2, 1, -3, 4, -1, 2, 1, -5, 4]), Some(6));
+/// assert_eq!(kadane::max_subarray(&[-2, 1, -3, 4, -1, 2, 1, -5, 4]).unwrap(), [4, -1, 2, 1]);
 /// ```
 /// Return None in case of zero-length array.
-/// 
+///
 pub fn max_subarray<T>(values: &[T]) -> Option<&[T]>
 where
     T: Clone + Ord + for<'a> AddAssign<&'a T>,
