@@ -1,5 +1,5 @@
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
-use kadane::max_subarray_sum;
+use kadane::kadane::max_subarray_sum;
 
 fn criterion_benchmark(c: &mut Criterion) {
     c.bench_function("kadane", |b| {
